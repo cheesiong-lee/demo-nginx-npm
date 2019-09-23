@@ -1,14 +1,11 @@
-FROM centos:7.6.1810
+FROM node:10
 
-RUN set -x \
-    && curl -sL https://rpm.nodesource.com/setup_10.x | bash - \
-    && yum install -y epel-release \
-    && yum install -y \
-       nodejs \
+RUN apt-get update \
+    && apt-get install --assume-yes --no-install-recommends \
        nano \
        curl \
        nginx \
-    && yum clean all && rm -rf /var/cache/yum
+    && apt-get autoclean && apt-get autoremove && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
